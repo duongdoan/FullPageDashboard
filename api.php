@@ -63,10 +63,11 @@ class Api {
         return $this->urls;
     }
     
-    private function getEntity($title, $url) {
+    private function getEntity($title, $url, $rotate) {
         return array(
             'title' => $title,
             'url' => $url,
+            'rotate' => $rotate,
         );
     }
     
@@ -82,6 +83,7 @@ class Api {
         $data = array(
             'options'   => $this->options,
             'urls'      => $this->urls,
+            'rotate'    => $this->rotate
         );
         
         file_put_contents($path, json_encode($data));
@@ -89,14 +91,24 @@ class Api {
     
     private function addUrl() {
         $this->read();
-        $this->urls[] = $this->getEntity($_POST['title'], $_POST['url']);
+        $this->urls[] = $this->getEntity($_POST['title'], $_POST['url'], 30);
         $this->store();
     }   
     
     private function updateSpeed() {
         $this->read();
         $this->options['speed'] = (int) $_POST['value'];
+        $this->options['id']    = (int) $_POST['id'];
+        
+        $newUrls = array();
+        foreach ($this->urls as $url) {
+            $newUrls[] = $url;
+        }
+        $newUrls[$this->options['id']]['rotate'] = $this->options['speed'];
+        $this->urls = $newUrls;
+        
         $this->store();
+        
     }
     
     private function deleteUrl() {
@@ -105,14 +117,15 @@ class Api {
         $title = $_POST['title'];
         $id = $_POST['id'];
         
-        if ($this->urls[$id]['title'] == $title) {
-            unset($this->urls[$id]);
-        }
         
+        unset($this->urls[$id]);
+        
+      
         $newUrls = array();
         foreach ($this->urls as $url) {
             $newUrls[] = $url;
         }
+        
         $this->urls = $newUrls;
         
         $this->store();

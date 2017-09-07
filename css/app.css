@@ -6,3 +6,19 @@
 .hidden {
 	display: none;
 }
+.show_nav{
+    position: fixed;
+    top: 3px;
+    right: 10px;
+    width: 40px;
+    z-index:999;
+}
+.show_nav img{
+    width: 100%;
+    cursor: pointer;
+    opacity: 0.1;
+}
+.nav-tabs{
+    -webkit-transition: all 1s;
+    transition: all 1s;
+}
