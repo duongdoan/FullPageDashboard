@@ -43,7 +43,7 @@ if ($id > count($urls)) {
 
   </head>
 
-  <body>
+  <body style="background-color: black;">
     <div id="container" style="overflow: hidden">
         <div class="show_nav">
             <img src="http://www.freeiconspng.com/uploads/settings-icon-6.png" />
@@ -139,12 +139,14 @@ if ($id > count($urls)) {
         if ($('.setting-active').length)
         {
             $('#container').css('height', $(window).height());
-            $('.tab-content').css('height', $(window).height() - 40 );
+            $('.tab-content').css('height', $(window).height() - 80 );
+            $('iframe').css('height', $(window).height() - 80 );
         }
         else
         {
             $('#container').css('height', $(window).height());
-            $('.tab-content').css('height', $(window).height()); // - $('.nav-tabs').height() - 5);
+            $('.tab-content').css('height', $(window).height() - 10 ); // - $('.nav-tabs').height() - 5);
+            $('iframe').css('height', $(window).height() - 10 );
         }
     }
 
@@ -192,6 +194,7 @@ if ($id > count($urls)) {
     }
 
     $(document).ready(function() {
+
         <?php if (count($urls) > 1) : ?>
         initKnob(rotateTime);
         play();

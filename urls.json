@@ -1,1 +1,1 @@
-{"options":{"version":"0.1","speed":6,"id":1},"urls":[{"title":"Home","url":"home.html","rotate":30}],"rotate":null}
+{"options":{"version":"0.1","speed":10,"id":1},"urls":[{"title":"Home","url":"home.html","rotate":10},{"title":"Home1","url":"https:\/\/unsplash.it\/1920\/1080\/?random","rotate":30}],"rotate":null}
