@@ -84,7 +84,7 @@ if ($id > count($urls)) {
         <div class="tab-content" style="overflow: hidden">
             <?php foreach ($urls as $key => $url) : ?>
                 <div role="tabpanel" style="overflow: hidden" class="tab-pane <?php echo ($key == 0) ? 'active' : ''; ?>" id="url<?php echo $key; ?>">
-                    <iframe src="<?php echo $url['url']; ?>" id="frame-<?php echo $key; ?>" style="width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;z-index: 0;">
+                    <iframe src="<?php echo $url['url']; ?>" id="frame-<?php echo $key; ?>" style="width:1920px; height:1080px; border:none; margin:0; padding:0; overflow:hidden;z-index: 0;">
                       Your browser doesn't support iframes
                   </iframe>
               </div>
