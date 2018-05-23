@@ -42,7 +42,7 @@ if ($id > count($urls)) {
       <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
 
   </head>
-
+  <script src="js/iframeResizer.js"></script>
   <body style="background-color: black;">
     <div id="container" style="overflow: hidden">
         <div class="show_nav">
@@ -84,7 +84,7 @@ if ($id > count($urls)) {
         <div class="tab-content" style="overflow: hidden">
             <?php foreach ($urls as $key => $url) : ?>
                 <div role="tabpanel" style="overflow: hidden" class="tab-pane <?php echo ($key == 0) ? 'active' : ''; ?>" id="url<?php echo $key; ?>">
-                    <iframe src="<?php echo $url['url']; ?>" id="frame-<?php echo $key; ?>" style="width:1920px; height:1080px; border:none; margin:0; padding:0; overflow:hidden;z-index: 0;">
+                    <iframe src="<?php echo $url['url']; ?>" id="frame-<?php echo $key; ?>" style="width:1920px; height:1080px; border:none; margin:0; padding:0; overflow:hidden;z-index: 0;" onload="iFrameResize({}, this)" allowtransparency>
                       Your browser doesn't support iframes
                   </iframe>
               </div>
@@ -140,13 +140,13 @@ if ($id > count($urls)) {
         {
             $('#container').css('height', $(window).height());
             $('.tab-content').css('height', $(window).height() - 80 );
-            $('iframe').css('height', $(window).height() - 80 );
+            //$('iframe').css('height', $(window).height() - 80 );
         }
         else
         {
             $('#container').css('height', $(window).height());
             $('.tab-content').css('height', $(window).height() - 10 ); // - $('.nav-tabs').height() - 5);
-            $('iframe').css('height', $(window).height() - 10 );
+            //$('iframe').css('height', $(window).height() - 10 );
         }
     }
 
