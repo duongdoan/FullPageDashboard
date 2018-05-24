@@ -46,7 +46,7 @@ if ($id > count($urls)) {
   <body style="background-color: black;">
     <div id="container" style="overflow: hidden">
         <div class="show_nav">
-            <img src="http://www.freeiconspng.com/uploads/settings-icon-6.png" />
+            <img src="img/settings-icon.png" />
         </div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist" style="display: none" id="dashboard_tab">
