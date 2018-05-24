@@ -91,7 +91,7 @@ class Api {
     
     private function addUrl() {
         $this->read();
-        $this->urls[] = $this->getEntity($_POST['title'], $_POST['url'], 30);
+        $this->urls[] = $this->getEntity($_POST['title'], $_POST['url'], $_POST['rotate']);
         $this->store();
     }   
     

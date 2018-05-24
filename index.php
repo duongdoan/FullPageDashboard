@@ -70,10 +70,10 @@ if ($id > count($urls)) {
                     </a>
                 </li>
             <?php endforeach; ?>
-            <li role="presentation"><a href="javascript:void(0)" data-toggle="modal" data-target="#addModal" aria-controls="add" role="tab" data-toggle="tab">+</a></li>
+            <li role="action"><a href="#" onclick="add()" aria-controls="add" >+</a></li>
             <?php if (count($urls) > 1) : ?>
-                <li role="presentation" class="pull-right" style="margin-top: 2px;padding-right: 45px;">
-                    <a href="javascript:void(0)" onclick="deleteUrl()">
+                <li role="action" class="pull-right" style="margin-top: 2px;padding-right: 45px;">
+                    <a href="#" onclick="deleteUrl()">
                         <span id="play-btn" class="glyphicon glyphicon-trash"></span>
                     </a>
                 </li>
@@ -112,6 +112,12 @@ if ($id > count($urls)) {
                         <label for="add-url" class="col-sm-2 control-label">URL</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="add-url" placeholder="URL">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-url" class="col-sm-2 control-label">Rotate</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="add-rotate" placeholder="Rotate" value="30">
                         </div>
                     </div>
                 </form>
@@ -158,6 +164,9 @@ if ($id > count($urls)) {
         if (next.text() == '+') {
             $($('.nav-tabs li')[2]).find('a').click();
             var new_rotate = $($('.nav-tabs li')[2]).data('rotate');
+        } else if (!new_rotate) {
+            $($('.nav-tabs li')[2]).find('a').click();
+            var new_rotate = $($('.nav-tabs li')[2]).data('rotate');
         } else {
             $('.nav-tabs li.active').next('li').find('a').click();
         }
@@ -190,6 +199,11 @@ if ($id > count($urls)) {
             max: maxValue,
             readOnly: true
         });
+    }
+
+    function add() {
+        stop();
+        $('#addModal').modal();
     }
 
     $(document).ready(function() {
@@ -269,8 +283,9 @@ if ($id > count($urls)) {
     function addUrl() {
         var title = $('#add-title').val();
         var url = $('#add-url').val();
+        var rotate = $('#add-rotate').val();
 
-        if (title == '' || url == '') {
+        if (title == '' || url == '' || rotate == '') {
             alert('Title and URL cannot be empty');
         }
 
@@ -280,7 +295,8 @@ if ($id > count($urls)) {
             data: {
                 'action': 'add',
                 'title': title,
-                'url': url
+                'url': url,
+                'rotate':rotate,
             },
             success: function(data, textStatus, jqXHR) {
                 window.location.reload();
@@ -296,10 +312,12 @@ if ($id > count($urls)) {
         if($(this).hasClass("setting-active")) {
             $('.nav-tabs').hide();   
             $(this).removeClass("setting-active");
+            play();
             resize();
         } else {
             $('.nav-tabs').show();   
             $(this).addClass("setting-active");
+            stop();
             resize();
         }
     }); 
@@ -308,7 +326,6 @@ if ($id > count($urls)) {
     function randomAnimation()
     {
         var animation = animations[Math.floor(Math.random() * animations.length)];
-        console.log(animation);
         return animation;
     }
 
