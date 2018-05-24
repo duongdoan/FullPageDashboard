@@ -29,7 +29,7 @@ if ($id > count($urls)) {
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
-
+    <link href="css/animate.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -49,7 +49,7 @@ if ($id > count($urls)) {
             <img src="http://www.freeiconspng.com/uploads/settings-icon-6.png" />
         </div>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" style="display: none">
+        <ul class="nav nav-tabs" role="tablist" style="display: none" id="dashboard_tab">
             <?php if (count($urls) > 1) : ?>
                 <li>
                     <a href="javascript:void(0)" onclick="changeCounter()">
@@ -65,7 +65,7 @@ if ($id > count($urls)) {
             <?php endif; ?>
             <?php foreach ($urls as $key => $url) : ?>
                 <li role="presentation" <?php echo ($key==0 ) ? 'class="active"' : ''; ?> data-whichkey="<?php echo $key;?>" data-rotate="<?php echo $url['rotate'];?>" data-name="<?php echo $url['title'];?>">
-                    <a href="#url<?php echo $key;?>" aria-controls="url<?php echo $key;?>" role="tab" data-toggle="tab">
+                    <a href="#url<?php echo $key;?>" aria-controls="url<?php echo $key;?>" role="tab" data-toggle="tab" data-easein="fadeInRightBig">
                         <?php echo $url['title']; ?>
                     </a>
                 </li>
@@ -81,7 +81,7 @@ if ($id > count($urls)) {
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" style="overflow: hidden">
+        <div class="tab-content" style="overflow: hidden" id="dashboard_content">
             <?php foreach ($urls as $key => $url) : ?>
                 <div role="tabpanel" style="overflow: hidden" class="tab-pane <?php echo ($key == 0) ? 'active' : ''; ?>" id="url<?php echo $key; ?>">
                     <iframe src="<?php echo $url['url']; ?>" id="frame-<?php echo $key; ?>" style="width:1920px; height:1080px; border:none; margin:0; padding:0; overflow:hidden;z-index: 0;" onload="iFrameResize({}, this)" allowtransparency>
@@ -304,6 +304,14 @@ if ($id > count($urls)) {
             resize();
         }
     }); 
+
+    var animations= ['fadeInLeft', 'fadeInRight', 'slideInLeft', 'slideInRight'];
+    function randomAnimation()
+    {
+        return animations[Math.floor(Math.random() * animations.length)];
+    }
+
+    $(function(){var b="fadeInLeft";var c;var a;d($("#dashboard_tab a"),$("#dashboard_content"));function d(e,f,g){e.click(function(i){i.preventDefault();$(this).tab("show");var h=$(this).data("easein");if(c){c.removeClass(a);}if(h){f.find("div.active").addClass("animated "+h);a=h;}else{if(g){f.find("div.active").addClass("animated "+g);a=g;}else{f.find("div.active").addClass("animated "+b);a=b;}}c=f.find("div.active");});}$("a[rel=popover]").popover().click(function(f){f.preventDefault();if($(this).data("easein")!=undefined){$(this).next().removeClass($(this).data("easein")).addClass("animated "+$(this).data("easein"));}else{$(this).next().addClass("animated "+b);}});});
 
 </script>
 </html>
