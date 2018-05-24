@@ -65,7 +65,7 @@ if ($id > count($urls)) {
             <?php endif; ?>
             <?php foreach ($urls as $key => $url) : ?>
                 <li role="presentation" <?php echo ($key==0 ) ? 'class="active"' : ''; ?> data-whichkey="<?php echo $key;?>" data-rotate="<?php echo $url['rotate'];?>" data-name="<?php echo $url['title'];?>">
-                    <a href="#url<?php echo $key;?>" aria-controls="url<?php echo $key;?>" role="tab" data-toggle="tab" data-easein="fadeInRightBig">
+                    <a href="#url<?php echo $key;?>" aria-controls="url<?php echo $key;?>" role="tab" data-toggle="tab" data-easein="fadeInRight">
                         <?php echo $url['title']; ?>
                     </a>
                 </li>
@@ -164,7 +164,6 @@ if ($id > count($urls)) {
         document.title = 'Full Page Dashboard - ' + $('.nav-tabs li.active a').text();
         if(new_rotate){
             counter = new_rotate;
-            console.log(counter);
         }
     }
 
@@ -305,13 +304,15 @@ if ($id > count($urls)) {
         }
     }); 
 
-    var animations= ['fadeInLeft', 'fadeInRight', 'slideInLeft', 'slideInRight'];
+    var animations= ['zoomIn','fadeIn','fadeInLeft', 'fadeInRight', 'slideInLeft', 'slideInRight'];
     function randomAnimation()
     {
-        return animations[Math.floor(Math.random() * animations.length)];
+        var animation = animations[Math.floor(Math.random() * animations.length)];
+        console.log(animation);
+        return animation;
     }
 
-    $(function(){var b="fadeInLeft";var c;var a;d($("#dashboard_tab a"),$("#dashboard_content"));function d(e,f,g){e.click(function(i){i.preventDefault();$(this).tab("show");var h=$(this).data("easein");if(c){c.removeClass(a);}if(h){f.find("div.active").addClass("animated "+h);a=h;}else{if(g){f.find("div.active").addClass("animated "+g);a=g;}else{f.find("div.active").addClass("animated "+b);a=b;}}c=f.find("div.active");});}$("a[rel=popover]").popover().click(function(f){f.preventDefault();if($(this).data("easein")!=undefined){$(this).next().removeClass($(this).data("easein")).addClass("animated "+$(this).data("easein"));}else{$(this).next().addClass("animated "+b);}});});
+    $(function(){var b="fadeInLeft";var c;var a;d($("#dashboard_tab a"),$("#dashboard_content"));function d(e,f,g){e.click(function(i){i.preventDefault();$(this).tab("show");var h=$(this).data("easein");if(c){c.removeClass(a);}if(h){f.find("div.active").addClass("animated "+h);a=h;}else{if(g){f.find("div.active").addClass("animated "+g);a=g;}else{f.find("div.active").addClass("animated "+randomAnimation());a=b;}}c=f.find("div.active");});}$("a[rel=popover]").popover().click(function(f){f.preventDefault();if($(this).data("easein")!=undefined){$(this).next().removeClass($(this).data("easein")).addClass("animated "+$(this).data("easein"));}else{$(this).next().addClass("animated "+randomAnimation());}});});
 
 </script>
 </html>
