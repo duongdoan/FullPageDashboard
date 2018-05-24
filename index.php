@@ -65,7 +65,7 @@ if ($id > count($urls)) {
             <?php endif; ?>
             <?php foreach ($urls as $key => $url) : ?>
                 <li role="presentation" <?php echo ($key==0 ) ? 'class="active"' : ''; ?> data-whichkey="<?php echo $key;?>" data-rotate="<?php echo $url['rotate'];?>" data-name="<?php echo $url['title'];?>">
-                    <a href="#url<?php echo $key;?>" aria-controls="url<?php echo $key;?>" role="tab" data-toggle="tab" data-easein="fadeInRight">
+                    <a href="#url<?php echo $key;?>" aria-controls="url<?php echo $key;?>" role="tab" data-toggle="tab" data-easein="fadeIn">
                         <?php echo $url['title']; ?>
                     </a>
                 </li>
